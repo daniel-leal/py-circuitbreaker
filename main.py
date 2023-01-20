@@ -12,11 +12,12 @@ cb = CircuitBreaker(
     listeners=[LogListener()]
 )
 
+
 @cb
 def make_request(period: int):
-    response = requests.get(f"http://localhost:8000?period={period}")
+    response = requests.get(f'http://localhost:8000?period={period}')
     if response.status_code != 200:
-        raise Exception(f"API call failed. CB Fail counter: {cb.fail_counter}")
+        raise Exception("API call failed. CB Fail counter: {cb.fail_counter}")
     return response.json()
 
 
@@ -26,7 +27,7 @@ def retry_call(max_retries=13, delay=2):
         try:
             period = 1220
 
-            if (retry_count >= 3 and retry_count <= 7):
+            if 3 <= retry_count <= 7:
                 period = 20
 
             logging.info(make_request(period))
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     )
     
     try:
-        result = retry_call()
+        retry_call()
     except:
         pass
         

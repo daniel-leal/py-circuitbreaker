@@ -8,6 +8,9 @@ how to use circuit breaker pattern with python.
 Before you begin, check requirements:
 
 - Python 3.7+
+
+## 📦 Packages
+
 - FastAPI
 - Pybreaker
 - Requests
